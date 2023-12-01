@@ -1,0 +1,138 @@
+<div
+    class="container"
+    *ngIf="stage == 'playing' || stage == 'intro'"
+>
+    <div class="status-bar">
+        <div class="score">
+            {{score}}分
+            <span *ngIf="multiplier > 1">x{{multiplier}}</span>
+        </div>
+        <div class="lives">
+            <i
+                *ngFor="let life of utils.range(0, totalLives)"
+                [class]="life < lives? 'heart active icon' : 'heart lost icon'"
+            ></i>
+        </div>
+        <div class="time" *ngIf="currentTime">{{currentTime}}分钟</div>
+        <div class="time" *ngIf="!currentTime">∞</div>
+    </div>
+
+    <div
+        [class]="({ '1': 'character', '2': 'jumping slowly character', '3': 'jumping normally character', '4': 'jumping quickly character' })[multiplier] ?? 'jumping frenetically character'"
+        [style]="color? ('color: ' + color) : ''"
+    >
+        {{currentHanzi?.character}}
+    </div>
+    <div class="container-actions">
+        <input
+            class="notebook input"
+            (keyup.enter)="onCharacterSubmit($any($event.target).value, $any($event.target))"
+            autofocus
+        />
+    </div>
+</div>
+
+<div
+    class="gameover-screen"
+    *ngIf="stage == 'gameover'"
+>
+    <div class="jumping normally title" >
+        Game Over
+    </div>
+    <div class="score">
+        <div class="value">Score: {{score}}分</div>
+    </div>
+    <div class="actions">
+        <button class="ui animated notebook button" (click)="start()">
+            <i class="ui redo icon"></i>
+            Play again
+        </button>
+        <button class="ui animated notebook button" (click)="startReview()">
+            Start Review
+            <i class="ui right arrow icon"></i>
+        </button>
+    </div>
+</div>
+
+<div
+    class="review-screen"
+    *ngIf="stage == 'review'"
+>   
+    <div class="jumping normally title" >
+        Review
+    </div>
+    
+    <div class="characters-review">
+        <div class="header row">
+            <span class="result">Result</span>
+            <span class="character">Character</span>
+            <span class="pinyin">Pinyin</span>
+            <span class="time">Elapsed Time</span>
+        </div>
+        <div
+            class="character"
+            *ngFor="let turn of turns"
+        >
+            <div *ngIf="turn.result == 'lose'" class="loser row">
+                <div class="result"><i class="ui close icon"></i></div>
+                <span class="character">{{turn.hanzi.character}}</span>
+                <span class="pinyin">{{turn.hanzi.pinyin[0]}}</span>
+                <span class="time">{{((turn.endTime - turn.startTime)/1000).toFixed(1)}}分钟</span>
+            </div>
+            <div *ngIf="turn.result == 'win'" class="winner row">
+                <div class="result"><i class="ui check icon"></i></div>
+                <span class="character">{{turn.hanzi.character}}</span>
+                <span class="pinyin">{{turn.hanzi.pinyin[0]}}</span>
+                <span class="time">{{((turn.endTime - turn.startTime)/1000).toFixed(1)}}分钟</span>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <button class="ui animated notebook button" (click)="start()">
+            <i class="ui redo icon"></i>
+            Play again
+        </button>
+        <button class="ui animated notebook button" (click)="showLeaderboards()">
+            Leaderboards
+            <i class="ui right trophy icon"></i>
+        </button>
+    </div>
+</div>
+
+<div
+    class="leaderboard-screen"
+    *ngIf="stage == 'leaderboards'"
+>
+    <div class="jumping slowly title" >
+        🏆 Leaderboards
+    </div>
+    <div class="leaderboards-table">
+        <div class="header row">
+            <span class="rank">Rank</span>
+            <span class="name">Name</span>
+            <span class="date">Date</span>
+            <span class="score">Score</span>
+        </div>
+        <hr/>
+        <div
+            *ngFor="let _score of leaderboard; index as index"
+            [class]="_score.score === score? 'selected row' : 'row'"
+        >
+            <div class="rank">{{index + 1}}</div>
+            <div class="name">{{_score.username}}</div>
+            <div class="date">{{_score.createdAt | date}}</div>
+            <div class="score">{{_score.score}}分</div>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button class="ui animated notebook button" (click)="exit()">
+            <i class="ui sign out icon"></i>
+            Exit
+        </button>
+        <button class="ui animated notebook button" (click)="start()">
+            Play again
+            <i class="ui redo icon"></i>
+        </button>
+    </div>
+</div>

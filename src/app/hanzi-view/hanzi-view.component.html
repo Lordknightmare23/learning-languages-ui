@@ -1,0 +1,35 @@
+<div class="game-square">
+    <div class="game">
+        <div class="score">
+            {{score}}分
+        </div>
+        <div class="lives">
+            <i
+                *ngFor="let life of range(0, maxLives)"
+                [class]="life < lives? 'heart active icon' : 'heart lost icon'"
+            ></i>
+        </div>
+        <div class="progress">
+            {{currentHanzi}}/{{allHanzi.length}}
+        </div>
+    </div>
+
+    <div class="characters">
+        <div class="character">
+            {{hanzi?.character}}
+        </div>
+    </div>
+
+    <div class="sample">
+        {{hanzi!.sentences[0]}}
+    </div>
+        
+    <div class="actions">
+        <div class="writing">
+            <div class="ui fluid action input">
+                <input type="text" placeholder="Write this character" (keyup.enter)="onWritingHanziSubmit($event.target)" (focus)="allowPlayMusic()">
+                <button class="ui teal icon button"><i class="ui right arrow icon"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

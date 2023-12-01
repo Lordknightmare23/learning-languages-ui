@@ -1,0 +1,7 @@
+{
+  "type": "angular",
+  "plugins": [
+    "semantic-ui",
+    "angular-proxies"
+  ]
+}

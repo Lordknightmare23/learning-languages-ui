@@ -1,0 +1,18 @@
+<div class="ui cards main">
+    <div class="ui card game-card" *ngFor="let game of games" [routerLink]="'/' + game.id">
+        <div class="ui slide masked reveal image">
+            <img [src]="'/assets/img/covers/' + game.id + '.png'" class="visible content"/>
+            <img [src]="'/assets/img/covers/' + game.id + '2.png'" class="hidden content"/>
+        </div>
+        <div class="content">
+            <a class="header">{{game.title}}</a>
+            <div class="description">
+                <p>{{game.description}}</p>
+            </div>
+        </div>
+        <div class="ui bottom attached teal button">
+            <i class="play icon"></i>
+            Play
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+/* You can add global styles to this file, and also import other style files */
+//define font face
+
+@font-face
+    font-family: 'Notebook'
+    src: url('/assets/fonts/Please write me a song.ttf') format('truetype')
+    font-weight: normal
+    font-style: normal
+
+//define global variables
+
+body
+    background-image: url("/assets/img/bg/tiny_grid.png")
+    line-height: normal !important
+
+.notebook.button
+    font-family: Notebook
+    background: transparent
+    border: 1px solid black
+    font-size: 2.5em
+    padding: 0
+    margin: 0
+    border-radius: 0.1em
+
+    height: 1.5em
+    width: 8em
+
+    .icon
+        font-size: 0.75em
+    
+.notebook.button:hover, .notebook.button:focus
+    background: #222
+    color: white
+
+.notebook.button.animated:hover
+    .icon
+        animation: jump 1s infinite
+
+
+.notebook.input
+    font-size: 2em
+    background: transparent
+    font-family: Notebook
+    border: none
+    border-bottom: 1px solid rgba(0,0,0,.25)
+
+@keyframes tilt
+    0%
+        transform: rotate(0deg)
+    33%
+        transform: rotate(-5deg)
+    66%
+        transform: rotate(5deg)
+    100%
+        transform: rotate(0deg)
+
+.tilting.normally
+    animation: tilt 4s infinite
+
+.tilting.slowly
+    animation: tilt 5s infinite
+
+.tilting.quickly
+    animation: tilt 2s infinite
+
+@keyframes jump
+    0%
+        transform: translateY(0)
+    25%
+        transform: scaleY(0.9) translateY(0.1em)
+    50%
+        transform: scaleY(1) translateY(-0.1em)
+    100%
+        transform: translateY(0)
+
+.jumping.slowly
+    animation: jump 8s infinite
+.jumping.normally
+    animation: jump 4s infinite
+.jumping.quickly
+    animation: jump 2s infinite
+.jumping.frenetically
+    animation: jump 1s infinite
