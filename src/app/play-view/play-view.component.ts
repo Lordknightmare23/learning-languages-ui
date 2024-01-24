@@ -11,6 +11,11 @@ export class PlayViewComponent {
       id: 'write-the-hanzi',
       title: 'Write the Hanzi',
       description: 'Chinese characters will pop-up and you will need to write them all using your keyboard.'
+    },
+    {
+      id: 'sentence-maker',
+      title: 'Sentence Maker',
+      description: 'Can you create correct random sentences with given words? Let\'s try it!.'
     }
   ];
 

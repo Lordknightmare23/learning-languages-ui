@@ -1,0 +1,42 @@
+<div class="game-screen">
+    <div class="gamemodes">
+        <div class="title">{{title}}</div>
+        <div class="buttons">
+            <button
+                [class]="gamemode == selectedGamemode? 'ui selected notebook button' : 'ui notebook button'"
+                *ngFor="let gamemode of gamemodes"
+                (click)="selectGamemode(gamemode)"
+            >
+                <i class="icon" [class]="gamemode.icon" *ngIf="gamemode.icon && gamemode !== selectedGamemode"></i>
+                <i class="play icon" *ngIf="gamemode === selectedGamemode"></i>
+                {{gamemode.name}}
+            </button>
+        </div>
+        <br/>
+        <div class="description" *ngIf="selectedGamemode">
+            {{selectedGamemode.description}}
+        </div>
+    </div>
+
+    <div class="settings" *ngIf="selectedGamemode">
+        <div class="title">Settings</div>
+        <hr/>
+        <div class="setting" *ngFor="let setting of selectedGamemode.settings">
+            <div class="icon">
+                <i class="icon" [class]="setting.icon" *ngIf="setting.icon"></i>
+            </div>
+            <div class="label">{{setting.label}}</div>
+            <div class="input">
+                <input
+                    *ngIf="setting.type == 'number'"
+                    [class]="'setting.type' + ' notebook input'"
+                    [type]="setting.type"
+                    [value]="setting.defaultValue"
+                    [min]="setting.min"
+
+                    (change)="setting.value = +$any($event.target).value"
+                />
+            </div>
+        </div>
+    </div>
+</div>

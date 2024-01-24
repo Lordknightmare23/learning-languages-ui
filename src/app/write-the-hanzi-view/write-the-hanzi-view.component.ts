@@ -12,7 +12,6 @@ import playAudio from 'lib/modules/media/playAudio';
 export class WriteTheHanziViewComponent {
 
   audio: { [key: string]: HTMLAudioElement } = {};
-  selectedGamemode?: Gamemode;
   gamemodes: Gamemode[] = [
     {
       name: "Classic",
@@ -85,16 +84,12 @@ export class WriteTheHanziViewComponent {
   }
 
   selectGamemode(gamemode: Gamemode) {
-    if (gamemode === this.selectedGamemode) {
-      const options: any = {};
+    const options: any = {};
 
-      for (const setting of gamemode.settings) {
-        options[setting.key] = setting.value ?? setting.defaultValue;
-      }
-      return this.play(gamemode, options);
+    for (const setting of gamemode.settings) {
+      options[setting.key] = setting.value ?? setting.defaultValue;
     }
-
-    this.selectedGamemode = gamemode;
+    return this.play(gamemode, options);
   }
 
   play (gamemode: Gamemode, options: any) {

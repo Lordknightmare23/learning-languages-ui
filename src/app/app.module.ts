@@ -9,6 +9,10 @@ import { PlayViewComponent } from './play-view/play-view.component';
 import { WriteTheHanziViewComponent } from './write-the-hanzi-view/write-the-hanzi-view.component';
 import { WriteTheHanziPlayComponent } from './write-the-hanzi-play/write-the-hanzi-play.component';
 import { DatePipe } from './date.pipe';
+import { GameViewComponent } from './game-view/game-view.component';
+import { GamemodeSelectorComponent } from './gamemode-selector/gamemode-selector.component';
+import { SentenceMakerViewComponent } from './sentence-maker-view/sentence-maker-view.component';
+import { GameScreenViewComponent } from './game-screen-view/game-screen-view.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { DatePipe } from './date.pipe';
     PlayViewComponent,
     WriteTheHanziViewComponent,
     WriteTheHanziPlayComponent,
-    DatePipe
+    DatePipe,
+    GameViewComponent,
+    GamemodeSelectorComponent,
+    SentenceMakerViewComponent,
+    GameScreenViewComponent
   ],
   imports: [
     BrowserModule,
